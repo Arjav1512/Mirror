@@ -9,15 +9,11 @@ function LandingPage() {
 
   const handleSignupSuccess = (response) => {
     setShowSuccess(true)
-    
-    // Get auth token from API response
-    const authToken = response.data?.auth_token
-    const streamlitUrl = import.meta.env.VITE_STREAMLIT_URL || 'http://localhost:8501'
-    
-    // Redirect immediately to Streamlit with JWT token for auto-login
-    setTimeout(() => {
-      window.location.href = `${streamlitUrl}?auth_token=${authToken}`
-    }, 2000)
+
+    // Store user ID in session storage for future features
+    if (response.data?.user_id) {
+      sessionStorage.setItem('mirror_user_id', response.data.user_id)
+    }
   }
 
   // Intersection Observer for fade-in animations on scroll

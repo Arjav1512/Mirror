@@ -54,8 +54,11 @@ function SignupForm({ onSuccess, showSuccess }) {
               </svg>
             </div>
             <h3 className="text-2xl font-bold mb-4 text-white">Welcome to Mirror!</h3>
-            <p className="text-slate-300 mb-8">Your journey begins. Redirecting to your journal...</p>
-            <div className="inline-block animate-spin h-10 w-10 border-3 border-slate-700 border-t-violet-500 rounded-full"></div>
+            <p className="text-slate-300 mb-6">Your profile has been created successfully!</p>
+            <div className="bg-violet-900/20 border border-violet-700/50 rounded-lg p-6 mt-6">
+              <p className="text-slate-300 mb-4">The full journaling experience with AI analysis is available when you run Mirror locally.</p>
+              <p className="text-sm text-slate-400">This is a demo of the landing page and signup flow. The complete app includes sentiment analysis, bias detection, and emotional insights.</p>
+            </div>
           </div>
         </div>
       </section>
