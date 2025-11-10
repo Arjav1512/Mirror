@@ -72,7 +72,7 @@ function TermsPage() {
             <section>
               <h2 className="text-2xl font-semibold text-white mb-3">Contact</h2>
               <p className="leading-relaxed">
-                For questions about these terms, contact us at mirror2025@gmail.com
+                For questions about these terms, contact us at arjav.jain1512@icloud.com
               </p>
             </section>
           </div>

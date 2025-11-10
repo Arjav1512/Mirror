@@ -60,8 +60,8 @@ function ContactPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-slate-900 rounded-lg p-6 border border-slate-700">
                   <h3 className="text-lg font-semibold text-white mb-2">Email</h3>
-                  <a href="mailto:mirror2025@gmail.com" className="text-violet-400 hover:text-violet-300 transition-colors">
-                    mirror2025@gmail.com
+                  <a href="mailto:arjav.jain1512@icloud.com" className="text-violet-400 hover:text-violet-300 transition-colors">
+                    arjav.jain1512@icloud.com
                   </a>
                 </div>
                 <div className="bg-slate-900 rounded-lg p-6 border border-slate-700">

@@ -33,8 +33,8 @@ function SignInPage() {
         sessionStorage.setItem('mirror_user_name', user.name)
         setSuccess(true)
         setTimeout(() => {
-          navigate('/')
-        }, 2000)
+          navigate('/dashboard')
+        }, 1500)
       } else {
         setError('No account found with this email. Please sign up first.')
       }

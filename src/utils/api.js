@@ -60,5 +60,65 @@ export const getUser = async (email) => {
   }
 }
 
+export const createJournalEntry = async (userId, entryText) => {
+  try {
+    const functionUrl = `${supabaseUrl}/functions/v1/create-journal-entry`
+
+    const response = await fetch(functionUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${supabaseAnonKey}`,
+      },
+      body: JSON.stringify({ userId, entryText }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: data.error || 'Failed to create entry'
+      }
+    }
+
+    return {
+      success: true,
+      data
+    }
+  } catch (error) {
+    throw new Error(error.message || 'Network error. Please try again.')
+  }
+}
+
+export const getJournalEntries = async (userId) => {
+  try {
+    const functionUrl = `${supabaseUrl}/functions/v1/get-journal-entries?userId=${userId}`
+
+    const response = await fetch(functionUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${supabaseAnonKey}`,
+      },
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: data.error || 'Failed to fetch entries'
+      }
+    }
+
+    return {
+      success: true,
+      data
+    }
+  } catch (error) {
+    throw new Error(error.message || 'Network error. Please try again.')
+  }
+}
+
 export { supabase }
 

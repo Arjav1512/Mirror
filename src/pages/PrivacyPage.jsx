@@ -66,7 +66,7 @@ function PrivacyPage() {
             <section>
               <h2 className="text-2xl font-semibold text-white mb-3">Your Rights</h2>
               <p className="leading-relaxed">
-                You have the right to access, modify, or delete your data at any time. Contact us at mirror2025@gmail.com for any privacy concerns.
+                You have the right to access, modify, or delete your data at any time. Contact us at arjav.jain1512@icloud.com for any privacy concerns.
               </p>
             </section>
           </div>
