@@ -30,29 +30,35 @@ Mirror is an intelligent journaling application that functions as your "self-awa
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Python 3.8 or higher
-- Node.js 16 or higher
-- Supabase account (already configured)
-
-### One-Command Setup
+### The Easiest Way (Recommended)
 
 ```bash
-./NEW_START.sh
+# Mac/Linux
+./start_mirror.sh
+
+# Windows
+start_mirror.bat
 ```
 
-This automatically:
-- ✅ Installs all dependencies
-- ✅ Downloads NLTK data
-- ✅ Builds frontend
+**That's it!** The script:
+- ✅ Installs everything automatically
 - ✅ Starts all services
+- ✅ **Opens your browser automatically to http://localhost:5001**
+
+### First Time Only
+
+```bash
+# Make script executable (Mac/Linux)
+chmod +x start_mirror.sh
+```
 
 ### Access Points
 
-- **Landing Page**: http://localhost:5001
+- **Landing Page**: http://localhost:5001 ← Opens automatically!
 - **Journal App**: http://localhost:8501
 - **API**: http://localhost:5001/api
+
+📖 **Need help?** See [GETTING_STARTED.md](GETTING_STARTED.md) for detailed instructions
 
 ---
 
