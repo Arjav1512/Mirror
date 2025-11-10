@@ -1,9 +1,11 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
+import { useNavigate } from 'react-router-dom'
 import HowItWorks from '../components/HowItWorks'
 import SignupForm from '../components/SignupForm'
 import Footer from '../components/Footer'
 
 function LandingPage() {
+  const navigate = useNavigate()
   const [showSuccess, setShowSuccess] = useState(false)
   const [isVisible, setIsVisible] = useState({})
 
@@ -52,12 +54,18 @@ function LandingPage() {
             </button>
             
             {/* Nav Links */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
               <button
                 onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
                 className="text-slate-300 hover:text-violet-400 transition-colors font-medium text-sm"
               >
                 How It Works
+              </button>
+              <button
+                onClick={() => navigate('/signin')}
+                className="text-slate-300 hover:text-violet-400 transition-colors font-medium text-sm"
+              >
+                Sign In
               </button>
               <button
                 onClick={() => document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' })}

@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -7,18 +8,18 @@ function Footer() {
       <div className="container mx-auto max-w-6xl">
         {/* Responsive link layout - stacks on mobile, horizontal on desktop */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-6">
-          <a href="#" className="text-slate-400 hover:text-violet-400 transition-colors duration-200 text-sm hover:underline">
+          <Link to="/privacy" className="text-slate-400 hover:text-violet-400 transition-colors duration-200 text-sm hover:underline">
             Privacy Policy
-          </a>
+          </Link>
           {/* Hide separator dots on mobile for cleaner look */}
           <span className="hidden sm:inline text-slate-700">•</span>
-          <a href="#" className="text-slate-400 hover:text-violet-400 transition-colors duration-200 text-sm hover:underline">
+          <Link to="/terms" className="text-slate-400 hover:text-violet-400 transition-colors duration-200 text-sm hover:underline">
             Terms of Service
-          </a>
+          </Link>
           <span className="hidden sm:inline text-slate-700">•</span>
-          <a href="mailto:mirror2025@gmail.com" className="text-slate-400 hover:text-violet-400 transition-colors duration-200 text-sm hover:underline">
+          <Link to="/contact" className="text-slate-400 hover:text-violet-400 transition-colors duration-200 text-sm hover:underline">
             Contact Us
-          </a>
+          </Link>
         </div>
         
         {/* Copyright text with better mobile sizing */}
