@@ -9,6 +9,7 @@ Flask-CORS>=4.0.0
 vaderSentiment>=3.3.2
 PyJWT>=2.8.0
 python-dotenv>=1.0.0
+supabase>=2.0.0
 
 # Optional: For AI-powered summaries (app works without these using rule-based fallback)
 # transformers>=4.30.0

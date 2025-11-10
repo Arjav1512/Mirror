@@ -13,26 +13,26 @@ JWT_SECRET = os.getenv('JWT_SECRET', 'mirror-secret-key-change-in-production-202
 JWT_ALGORITHM = 'HS256'
 JWT_EXPIRATION_HOURS = 24
 
-def generate_auth_token(user_id: int, email: str, name: str) -> str:
+def generate_auth_token(user_id: str, email: str, name: str) -> str:
     """
     Generate JWT token for user authentication
-    
+
     Args:
-        user_id: User's database ID
+        user_id: User's database ID (UUID string for Supabase)
         email: User's email
         name: User's full name
-    
+
     Returns:
         JWT token string
     """
     payload = {
-        'user_id': user_id,
+        'user_id': str(user_id),
         'email': email,
         'name': name,
         'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=JWT_EXPIRATION_HOURS),
         'iat': datetime.datetime.utcnow()
     }
-    
+
     token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
     return token
 

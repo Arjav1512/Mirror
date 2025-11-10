@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-from database import Database
+from supabase_client import SupabaseDatabase
 from auth import generate_auth_token
 
 # Get frontend directory path - resolve to absolute path
@@ -41,7 +41,7 @@ CORS(app, resources={
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Disable caching in dev
 app.config['PREFERRED_URL_SCHEME'] = 'http'
 
-db = Database()
+db = SupabaseDatabase()
 
 # Debug: Print paths
 print(f"Frontend dist directory: {FRONTEND_DIR}")
