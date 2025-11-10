@@ -36,7 +36,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Use SERVICE_ROLE_KEY to bypass RLS for user creation
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
@@ -44,7 +43,6 @@ Deno.serve(async (req: Request) => {
 
     const data: SignupRequest = await req.json();
 
-    // Validate required fields
     if (!data.email || !data.name) {
       return new Response(
         JSON.stringify({ error: 'Email and name are required' }),
@@ -75,7 +73,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Create comprehensive onboarding data
     const onboardingData = {
       age_group: data.ageGroup,
       occupation: data.occupation,
@@ -86,7 +83,6 @@ Deno.serve(async (req: Request) => {
       profile_completed_at: new Date().toISOString(),
     };
 
-    // Check if user already exists
     const { data: existingUser } = await supabaseClient
       .from('users')
       .select('id, email, name')
@@ -98,6 +94,8 @@ Deno.serve(async (req: Request) => {
         JSON.stringify({
           success: true,
           user_id: existingUser.id,
+          email: existingUser.email,
+          name: existingUser.name,
           message: 'Welcome back! Redirecting to your dashboard...',
         }),
         {
@@ -107,7 +105,6 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Create new user
     const { data: newUser, error: insertError } = await supabaseClient
       .from('users')
       .insert({
@@ -115,7 +112,7 @@ Deno.serve(async (req: Request) => {
         name: data.name,
         onboarding_data: onboardingData,
       })
-      .select('id')
+      .select('id, email, name')
       .single();
 
     if (insertError) {
@@ -133,6 +130,8 @@ Deno.serve(async (req: Request) => {
       JSON.stringify({
         success: true,
         user_id: newUser.id,
+        email: newUser.email,
+        name: newUser.name,
         message: 'Profile created successfully! Redirecting to your dashboard...',
       }),
       {

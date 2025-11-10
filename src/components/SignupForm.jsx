@@ -30,6 +30,7 @@ function SignupForm({ onSuccess, showSuccess }) {
     setLoading(true)
 
     try {
+      sessionStorage.setItem('mirror_user_name', formData.name)
       const response = await signupUser(formData)
       if (response.success) {
         onSuccess(response)

@@ -10,12 +10,23 @@ function LandingPage() {
   const [isVisible, setIsVisible] = useState({})
 
   const handleSignupSuccess = (response) => {
-    setShowSuccess(true)
-
-    // Store user ID in session storage for future features
     if (response.data?.user_id) {
       sessionStorage.setItem('mirror_user_id', response.data.user_id)
+
+      if (response.data.email) {
+        sessionStorage.setItem('mirror_user_email', response.data.email)
+      }
+
+      const userName = sessionStorage.getItem('mirror_user_name')
+      if (!userName && response.data.name) {
+        sessionStorage.setItem('mirror_user_name', response.data.name)
+      }
+
+      setTimeout(() => {
+        navigate('/dashboard')
+      }, 1500)
     }
+    setShowSuccess(true)
   }
 
   // Intersection Observer for fade-in animations on scroll
