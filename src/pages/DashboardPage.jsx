@@ -33,11 +33,18 @@ function DashboardPage() {
       setLoading(true)
       const response = await getJournalEntries(userId)
 
+      console.log('Load entries response:', response)
+
       if (response.success && response.data?.entries) {
+        console.log('Loaded entries:', response.data.entries)
         setEntries(response.data.entries)
+      } else {
+        console.log('No entries or error:', response)
+        setEntries([])
       }
     } catch (error) {
       console.error('Error loading entries:', error)
+      setEntries([])
     } finally {
       setLoading(false)
     }
@@ -53,6 +60,8 @@ function DashboardPage() {
     try {
       const response = await createJournalEntry(user.id, journalEntry.trim())
 
+      console.log('Create entry response:', response)
+
       if (response.success) {
         setJournalEntry('')
         setSuccessMessage('Entry saved and analyzed successfully!')
@@ -60,11 +69,12 @@ function DashboardPage() {
 
         setTimeout(() => setSuccessMessage(''), 5000)
       } else {
-        setSuccessMessage('Failed to save entry. Please try again.')
+        console.error('Failed to save entry:', response)
+        setSuccessMessage(response.error || 'Failed to save entry. Please try again.')
       }
     } catch (error) {
       console.error('Error creating entry:', error)
-      setSuccessMessage('Error saving entry. Please try again.')
+      setSuccessMessage('Error saving entry: ' + (error.message || 'Please try again.'))
     } finally {
       setSubmitting(false)
     }
@@ -220,6 +230,25 @@ function DashboardPage() {
             {activeTab === 'journal' && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
+                  {entries.length === 0 && (
+                    <div className="bg-violet-900/20 border border-violet-700/50 rounded-lg p-6 mb-6">
+                      <div className="flex items-start gap-3">
+                        <span className="text-2xl">🎯</span>
+                        <div>
+                          <h4 className="font-semibold text-white mb-2">Welcome to Mirror!</h4>
+                          <p className="text-sm text-slate-300 mb-2">
+                            Write your first journal entry below to unlock all features:
+                          </p>
+                          <ul className="text-sm text-slate-300 space-y-1 ml-4">
+                            <li>• Automatic sentiment analysis</li>
+                            <li>• Cognitive bias detection</li>
+                            <li>• Emotional timeline visualization</li>
+                            <li>• Self-awareness insights</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                     <span>✍️</span>
                     New Entry
@@ -323,11 +352,43 @@ function DashboardPage() {
             )}
 
             {activeTab === 'timeline' && (
-              <EmotionalTimeline entries={entries} />
+              <div>
+                {entries.length === 0 && (
+                  <div className="bg-blue-900/20 border border-blue-700/50 rounded-lg p-6 mb-6">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">💡</span>
+                      <div>
+                        <h4 className="font-semibold text-white mb-2">Start Your Emotional Journey</h4>
+                        <p className="text-sm text-slate-300">
+                          Your emotional timeline will appear here once you create journal entries.
+                          Go to the Journal tab and write your first entry to see your sentiment patterns visualized!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <EmotionalTimeline entries={entries} />
+              </div>
             )}
 
             {activeTab === 'biases' && (
-              <BiasInsights entries={entries} />
+              <div>
+                {entries.length === 0 && (
+                  <div className="bg-blue-900/20 border border-blue-700/50 rounded-lg p-6 mb-6">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">💡</span>
+                      <div>
+                        <h4 className="font-semibold text-white mb-2">Discover Your Thinking Patterns</h4>
+                        <p className="text-sm text-slate-300">
+                          Cognitive bias detection will activate once you start journaling.
+                          Write a few entries in the Journal tab to see what patterns Mirror can identify in your thinking!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <BiasInsights entries={entries} />
+              </div>
             )}
           </div>
         </div>
